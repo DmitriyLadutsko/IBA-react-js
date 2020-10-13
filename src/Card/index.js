@@ -1,7 +1,7 @@
 import React from "react";
 import './Card.css'
 
-const card = () => {
+const Card = () => {
     return (
         <div className="Card">
             <h3>The Central Nervous System</h3>
@@ -10,4 +10,4 @@ const card = () => {
     );
 };
 
-export default card;
+export default Card;
