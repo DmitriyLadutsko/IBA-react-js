@@ -1,3 +1,7 @@
 .App {
+  width: 97%;
+  margin: auto;
+  height: 95vh;
   text-align: center;
+  border: 2px solid #2f6060;
 }

@@ -1,0 +1,16 @@
+.Card {
+    width: 250px;
+    margin: 10px;
+    border: 2px solid #347272;
+    box-shadow: 5px 5px 15px 0 #1c3e3e;
+    background-color: #ebc2f5;
+}
+
+/*.Card h3 {*/
+/*    border-bottom: 1px solid #1c3e3e;*/
+/*    padding-bottom: 10px;*/
+/*}*/
+
+.ff {
+    justify-content: space-between;
+}
