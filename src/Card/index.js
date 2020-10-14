@@ -3,16 +3,16 @@ import './Card.css'
 
 const Card = () => {
 
-    const [styleState, setStyleState] = useState({
-            backgroundColor: '#c2f5f5'
-        },
-    );
+    const [isChecked, setChecked] = useState(false);
 
-    const switchCardStyle = () => {
-        setStyleState({
-            backgroundColor: '#ebc2f5'
-        });
-    };
+    const changeStyleCard = () => {
+        let styleCard = {backgroundColor: '#c2f5f5'};
+        if (isChecked) {
+            styleCard = {backgroundColor: '#ebc2f5'};
+        }
+        return styleCard
+    }
+
 
     const styleCaption = {
         display: 'flex',
@@ -20,10 +20,10 @@ const Card = () => {
     };
 
     return (
-        <div className="Card" style={styleState}>
+        <div className="Card" style={changeStyleCard()}>
             <div style={styleCaption}>
                 <h4>The CNS</h4>
-                <input type="checkbox" onChange={switchCardStyle}/>
+                <input type="checkbox" onClick={() => setChecked(!isChecked)}/>
             </div>
             <hr/>
             <p>The brain and spinal cord are the organs of the central nervous system.</p>
