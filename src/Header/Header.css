@@ -5,5 +5,7 @@
     padding-top: 1.5rem;
     background-color: #f3cfcf;
     color: #1c3e3e;
-    letter-spacing: 2px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
 }
