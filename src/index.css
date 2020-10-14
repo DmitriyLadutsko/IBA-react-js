@@ -13,5 +13,13 @@ code {
 }
 
 input {
-  margin: 25px 0;
+  margin: 25px 0 25px 10px;
+  cursor: pointer;
+}
+
+button {
+  padding: 0 2px;
+  cursor: pointer;
+  color: blanchedalmond;
+  background-color: darkmagenta;
 }
