@@ -17,6 +17,14 @@ input {
   cursor: pointer;
 }
 
+h4 {
+  overflow: hidden;
+}
+
+p {
+  overflow: hidden;
+}
+
 button {
   padding: 0 2px;
   cursor: pointer;
