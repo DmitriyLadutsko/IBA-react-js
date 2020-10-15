@@ -13,5 +13,25 @@ code {
 }
 
 input {
-  margin: 25px 0;
+  margin: 25px 0 25px 10px;
+  cursor: pointer;
+}
+
+textarea {
+  margin: 10px 0;
+}
+
+h4 {
+  overflow: hidden;
+}
+
+p {
+  overflow: hidden;
+}
+
+button {
+  padding: 0 2px;
+  cursor: pointer;
+  color: blanchedalmond;
+  background-color: darkmagenta;
 }
