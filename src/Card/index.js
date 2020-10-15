@@ -57,11 +57,11 @@ const Card = (props) => {
             }
             {!isEdit ?
                 <div>
-                    {!props.viewMode ?
+                    {!props.viewMode &&
                         <button
                             onClick={editMode}>
                             <FaPencilAlt/>
-                        </button> : null
+                        </button>
                     }
                     <input
                         type="checkbox"
@@ -71,25 +71,25 @@ const Card = (props) => {
                 </div> :
 
                 <div>
-                    {props.viewMode ?
+                    {props.viewMode &&
                         <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => setChecked(!isChecked)}
-                        /> : null
+                        />
                     }
 
-                    {!props.viewMode ?
+                    {!props.viewMode &&
                         <button
                             onClick={saveChanges}>
                             <FaSave/>
-                        </button> : null
+                        </button>
                     }
-                    {!props.viewMode ?
+                    {!props.viewMode &&
                         <button
                             onClick={() => setEdit(!isEdit)}>
                             <MdClear/>
-                        </button> : null
+                        </button>
                     }
                 </div>
             }

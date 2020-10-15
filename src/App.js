@@ -43,7 +43,7 @@ class App extends Component {
                 text: 'The principal function of the urinary system is to maintain the volume and composition of body fluids within normal limits.'
             },
         ],
-        isViewMode: false,
+        isViewMode: true,
     }
 
     toggleViewModeHandler = () => {
