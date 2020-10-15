@@ -9,7 +9,7 @@ const Card = () => {
 
     const [isChecked, setChecked] = useState(false);
 
-    const [isEdit, setInput] = useState(false);
+    const [isEdit, setEdit] = useState(false);
 
     const [caption, setCaption] = useState({
         captionValue: 'The CNS'
@@ -21,7 +21,7 @@ const Card = () => {
 
     const editMode = () => {
         setChecked(false);
-        setInput(!isEdit);
+        setEdit(!isEdit);
     };
 
     let changedCaption;
@@ -30,7 +30,7 @@ const Card = () => {
     const saveChanges = () => {
         setCaption({captionValue: changedCaption});
         setText({textValue: changedText})
-        setInput(!isEdit);
+        setEdit(!isEdit);
     };
 
     const styleCaption = {
@@ -69,7 +69,7 @@ const Card = () => {
                         <FaSave/>
                     </button>
                     <button
-                        onClick={() => setInput(!isEdit)}>
+                        onClick={() => setEdit(!isEdit)}>
                         <MdClear/>
                     </button>
                 </div>
