@@ -3,7 +3,7 @@ import './Header.css'
 
 const Header = () => {
     return (
-        <h1 className="Header">Main Subdivisions</h1>
+        <h1 className="Header">human body systems</h1>
     );
 };
 

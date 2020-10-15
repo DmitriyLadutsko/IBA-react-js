@@ -18,15 +18,21 @@ input {
 }
 
 textarea {
-  margin: 10px 0;
+  margin: 10px 5px;
 }
 
 h4 {
   overflow: hidden;
+  max-width: 165px;
+  max-height: 65px;
 }
 
 p {
   overflow: hidden;
+  width: 300px;
+  max-height: 85px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 button {

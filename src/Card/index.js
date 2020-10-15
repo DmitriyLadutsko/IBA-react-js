@@ -5,18 +5,22 @@ import {FaPencilAlt} from 'react-icons/fa';
 import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
 
-const Card = () => {
+const Card = (props) => {
 
     const [isChecked, setChecked] = useState(false);
 
     const [isEdit, setEdit] = useState(false);
 
+    if (props.viewMode && isEdit) {
+        setEdit(!isEdit)
+    }
+
     const [caption, setCaption] = useState({
-        captionValue: 'The CNS'
+        captionValue: props.cardInfo.caption
     });
 
     const [text, setText] = useState({
-        textValue: 'The brain and spinal cord are the organs of the central nervous system.'
+        textValue: props.cardInfo.text
     });
 
     const editMode = () => {
@@ -42,8 +46,8 @@ const Card = () => {
 
     let captionView = (
         <div style={styleCaption}>
-            {!isEdit ?
-                <h4>{caption.captionValue}</h4> :
+            {(!isEdit || props.viewMode) ?
+                <h4 onClick={() => setChecked(!isChecked)}>{caption.captionValue}</h4> :
                 <textarea
                     defaultValue={caption.captionValue}
                     onChange={event => {
@@ -53,25 +57,40 @@ const Card = () => {
             }
             {!isEdit ?
                 <div>
-                    <button
-                        onClick={editMode}>
-                        <FaPencilAlt/>
-                    </button>
+                    {!props.viewMode ?
+                        <button
+                            onClick={editMode}>
+                            <FaPencilAlt/>
+                        </button> : null
+                    }
                     <input
                         type="checkbox"
                         checked={isChecked}
                         onChange={() => setChecked(!isChecked)}
                     />
                 </div> :
+
                 <div>
-                    <button
-                        onClick={saveChanges}>
-                        <FaSave/>
-                    </button>
-                    <button
-                        onClick={() => setEdit(!isEdit)}>
-                        <MdClear/>
-                    </button>
+                    {props.viewMode ?
+                        <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => setChecked(!isChecked)}
+                        /> : null
+                    }
+
+                    {!props.viewMode ?
+                        <button
+                            onClick={saveChanges}>
+                            <FaSave/>
+                        </button> : null
+                    }
+                    {!props.viewMode ?
+                        <button
+                            onClick={() => setEdit(!isEdit)}>
+                            <MdClear/>
+                        </button> : null
+                    }
                 </div>
             }
         </div>
@@ -79,7 +98,7 @@ const Card = () => {
 
     let textView = (
         <div>
-            {!isEdit ?
+            {(!isEdit || props.viewMode) ?
                 <p>{text.textValue}</p> :
                 <textarea
                     defaultValue={text.textValue}
