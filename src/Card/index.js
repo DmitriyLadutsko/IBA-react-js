@@ -9,7 +9,7 @@ const Card = () => {
 
     const [isChecked, setChecked] = useState(false);
 
-    const [isInput, setInput] = useState(false);
+    const [isEdit, setInput] = useState(false);
 
     const [caption, setCaption] = useState({
         captionValue: 'The CNS'
@@ -19,18 +19,18 @@ const Card = () => {
         textValue: 'The brain and spinal cord are the organs of the central nervous system.'
     });
 
-    const edit = () => {
+    const editMode = () => {
         setChecked(false);
-        setInput(!isInput);
+        setInput(!isEdit);
     };
 
     let changedCaption;
     let changedText;
 
-    const getEdited = () => {
+    const saveChanges = () => {
         setCaption({captionValue: changedCaption});
         setText({textValue: changedText})
-        setInput(!isInput);
+        setInput(!isEdit);
     };
 
     const styleCaption = {
@@ -40,52 +40,61 @@ const Card = () => {
         justifyContent: 'space-between'
     };
 
-    return (
-        <div className="Card" style={{backgroundColor: isChecked ? '#c2f5f5' : '#ebc2f5'}}>
-            <div style={styleCaption}>
-                <h4 style={{display: !isInput ? '' : 'none'}}>{caption.captionValue}</h4>
-                <input
-                    style={{display: isInput ? '' : 'none'}}
-                    type="text"
-                    value={changedCaption}
+    let captionView = (
+        <div style={styleCaption}>
+            {!isEdit ?
+                <h4>{caption.captionValue}</h4> :
+                <textarea
+                    defaultValue={caption.captionValue}
                     onChange={event => {
                         changedCaption = event.target.value
                     }}
                 />
+            }
+            {!isEdit ?
                 <div>
                     <button
-                        style={{display: !isInput ? '' : 'none'}}
-                        onClick={edit}>
+                        onClick={editMode}>
                         <FaPencilAlt/>
                     </button>
-                    <button
-                        style={{display: isInput ? '' : 'none'}}
-                        onClick={getEdited}>
-                        <FaSave/>
-                    </button>
-                    <button
-                        style={{display: isInput ? '' : 'none'}}
-                        onClick={() => setInput(!isInput)}>
-                        <MdClear/>
-                    </button>
                     <input
-                        style={{display: !isInput ? '' : 'none'}}
                         type="checkbox"
                         checked={isChecked}
                         onChange={() => setChecked(!isChecked)}
                     />
+                </div> :
+                <div>
+                    <button
+                        onClick={saveChanges}>
+                        <FaSave/>
+                    </button>
+                    <button
+                        onClick={() => setInput(!isEdit)}>
+                        <MdClear/>
+                    </button>
                 </div>
-            </div>
+            }
+        </div>
+    );
+
+    let textView = (
+        <div>
+            {!isEdit ?
+                <p>{text.textValue}</p> :
+                <textarea
+                    defaultValue={text.textValue}
+                    onChange={event => {
+                        changedText = event.target.value
+                    }}
+                />}
+        </div>
+    );
+
+    return (
+        <div className="Card" style={{backgroundColor: isChecked ? '#c2f5f5' : '#ebc2f5'}}>
+            {captionView}
             <hr/>
-            <p style={{display: !isInput ? '' : 'none'}}>{text.textValue}</p>
-            <input
-                style={{display: isInput ? '' : 'none'}}
-                type="text"
-                value={changedText}
-                onChange={event => {
-                    changedText = event.target.value
-                }}
-            />
+            {textView}
         </div>
     );
 };
