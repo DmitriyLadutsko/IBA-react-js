@@ -7,43 +7,52 @@ class App extends Component {
     state = {
         cards: [
             {
+                id: '11',
                 caption: 'Nervous System',
                 text: 'The nervous system is the major controlling, regulatory, and communicating system in the body. '
             },
             {
+                id: '12',
                 caption: 'Muscular System',
                 text: 'The muscular system is composed of specialized cells called muscle fibers.'
             },
             {
+                id: '13',
                 caption: 'Endocrine System',
                 text: 'The endocrine system, along with the nervous system, functions in the regulation of body activities.'
             },
             {
+                id: '14',
                 caption: 'Cardiovascular System',
                 text: 'The cardiovascular system is sometimes called the blood-vascular, or simply the circulatory, system.'
             },
             {
+                id: '14',
                 caption: 'Respiratory System',
                 text: 'When the respiratory system is mentioned, people generally think of breathing, but breathing is only one of the activities of the respiratory system.'
             },
             {
+                id: '15',
                 caption: 'Digestive System',
                 text: 'The digestive system includes the digestive tract and its accessory organs, which process food into molecules that can be absorbed and utilized by the cells of the body. '
             },
             {
+                id: '16',
                 caption: 'Skeletal System',
                 text: 'Humans are vertebrates, animals having a vertabral column or backbone.'
             },
             {
+                id: '17',
                 caption: 'Reproductive System',
                 text: 'The major function of the reproductive system is to ensure survival of the species.'
             },
             {
+                id: '18',
                 caption: 'Urinary System',
                 text: 'The principal function of the urinary system is to maintain the volume and composition of body fluids within normal limits.'
             },
         ],
-        isViewMode: true,
+        isViewMode: false,
     }
 
     toggleViewModeHandler = () => {
@@ -51,12 +60,42 @@ class App extends Component {
         this.setState({isViewMode: !doesShow});
     }
 
+    captionChangedHandler = (event, id) => {
+        const cardIndex = this.state.cards.findIndex(card => {
+            return card.id === id;
+        });
+        const card = {...this.state.cards[cardIndex]};
+
+        card.caption = event.target.value;
+
+        const cards = [...this.state.cards];
+        cards[cardIndex] = card;
+
+        this.setState({cards: cards})
+    };
+
+    textChangedHandler = (event, id) => {
+        const cardIndex = this.state.cards.findIndex(card => {
+            return card.id === id;
+        });
+        const card = {...this.state.cards[cardIndex]};
+
+        card.text = event.target.value;
+
+        const cards = [...this.state.cards];
+        cards[cardIndex] = card;
+
+        this.setState({cards: cards})
+    };
+
     render() {
         const listCards = this.state.cards.map((card, index) =>
             <Card
-                key={index}
+                key={card.id}
                 cardInfo={card}
                 viewMode={this.state.isViewMode}
+                changedCaption={(event) => this.captionChangedHandler(event, card.id)}
+                changedText={(event) => this.textChangedHandler(event, card.id)}
             />)
 
         return (

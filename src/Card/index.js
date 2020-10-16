@@ -28,12 +28,9 @@ const Card = (props) => {
         setEdit(!isEdit);
     };
 
-    let changedCaption;
-    let changedText;
-
     const saveChanges = () => {
-        setCaption({captionValue: changedCaption});
-        setText({textValue: changedText})
+        setCaption({captionValue: props.cardInfo.caption});
+        setText({textValue: props.cardInfo.text})
         setEdit(!isEdit);
     };
 
@@ -50,10 +47,8 @@ const Card = (props) => {
                 <h4 onClick={() => setChecked(!isChecked)}>{caption.captionValue}</h4> :
                 <input
                     type="text"
-                    defaultValue={caption.captionValue}
-                    onChange={event => {
-                        changedCaption = event.target.value
-                    }}
+                    value={props.cardInfo.caption}
+                    onChange={props.changedCaption}
                 />
             }
             {!isEdit ?
@@ -102,10 +97,8 @@ const Card = (props) => {
             {(!isEdit || props.viewMode) ?
                 <p>{text.textValue}</p> :
                 <textarea
-                    defaultValue={text.textValue}
-                    onChange={event => {
-                        changedText = event.target.value
-                    }}
+                    value={props.cardInfo.text}
+                    onChange={props.changedText}
                 />}
         </div>
     );
