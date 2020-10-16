@@ -60,27 +60,22 @@ class App extends Component {
         this.setState({isViewMode: !doesShow});
     }
 
-    captionChangedHandler = (event, id) => {
+    cardChangedHandler = (event, id, level) => {
+
         const cardIndex = this.state.cards.findIndex(card => {
             return card.id === id;
         });
         const card = {...this.state.cards[cardIndex]};
 
-        card.caption = event.target.value;
-
-        const cards = [...this.state.cards];
-        cards[cardIndex] = card;
-
-        this.setState({cards: cards})
-    };
-
-    textChangedHandler = (event, id) => {
-        const cardIndex = this.state.cards.findIndex(card => {
-            return card.id === id;
-        });
-        const card = {...this.state.cards[cardIndex]};
-
-        card.text = event.target.value;
+        // eslint-disable-next-line default-case
+        switch (level) {
+            case 'caption' :
+                card.caption = event.target.value;
+                break
+            case 'text' :
+                card.text = event.target.value;
+                break
+        }
 
         const cards = [...this.state.cards];
         cards[cardIndex] = card;
@@ -89,13 +84,15 @@ class App extends Component {
     };
 
     render() {
-        const listCards = this.state.cards.map((card, index) =>
+        const listCards = this.state.cards.map((card) =>
             <Card
                 key={card.id}
                 cardInfo={card}
                 viewMode={this.state.isViewMode}
-                changedCaption={(event) => this.captionChangedHandler(event, card.id)}
-                changedText={(event) => this.textChangedHandler(event, card.id)}
+                changedCaption={(event) =>
+                    this.cardChangedHandler(event, card.id, 'caption')}
+                changedText={(event) =>
+                    this.cardChangedHandler(event, card.id, 'text')}
             />)
 
         return (
