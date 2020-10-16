@@ -11,10 +11,6 @@ const Card = (props) => {
 
     const [isEdit, setEdit] = useState(false);
 
-    if (props.viewMode && isEdit) {
-        setEdit(!isEdit)
-    }
-
     const [caption, setCaption] = useState({
         captionValue: props.cardInfo.caption
     });
@@ -22,6 +18,10 @@ const Card = (props) => {
     const [text, setText] = useState({
         textValue: props.cardInfo.text
     });
+
+    if (props.viewMode && isEdit) {
+        setEdit(!isEdit)
+    }
 
     const editMode = () => {
         setChecked(false);
@@ -48,7 +48,8 @@ const Card = (props) => {
         <div style={styleCaption}>
             {(!isEdit || props.viewMode) ?
                 <h4 onClick={() => setChecked(!isChecked)}>{caption.captionValue}</h4> :
-                <textarea
+                <input
+                    type="text"
                     defaultValue={caption.captionValue}
                     onChange={event => {
                         changedCaption = event.target.value

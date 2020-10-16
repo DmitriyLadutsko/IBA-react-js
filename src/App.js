@@ -52,9 +52,9 @@ class App extends Component {
     }
 
     render() {
-        const listCards = this.state.cards.slice().map((card, index) =>
+        const listCards = this.state.cards.map((card, index) =>
             <Card
-                key={index.toString()}
+                key={index}
                 cardInfo={card}
                 viewMode={this.state.isViewMode}
             />)
