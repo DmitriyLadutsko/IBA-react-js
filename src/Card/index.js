@@ -31,7 +31,7 @@ const Card = (props) => {
     };
 
     const saveChanges = () => {
-        props.changedCaption(caption.captionValue, text.textValue);
+        props.cardChanged(caption.captionValue, text.textValue);
         setEdit(!isEdit);
     };
 

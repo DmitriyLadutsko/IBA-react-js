@@ -60,7 +60,7 @@ class App extends Component {
         this.setState({isViewMode: !doesShow});
     }
 
-    cardChangedHandler = (caption, text, id) => {
+    cardChangedHandler = id => (caption, text) => {
 
         const cardIndex = this.state.cards.findIndex(card => {
             return card.id === id;
@@ -82,8 +82,7 @@ class App extends Component {
                 key={card.id}
                 cardInfo={card}
                 viewMode={this.state.isViewMode}
-                changedCaption={(caption, text) =>
-                    this.cardChangedHandler(caption, text, card.id,)}
+                cardChanged={this.cardChangedHandler(card.id)}
             />)
 
         return (
