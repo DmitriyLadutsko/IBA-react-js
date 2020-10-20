@@ -5,31 +5,33 @@ import {FaPencilAlt} from 'react-icons/fa';
 import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
 
-const Card = () => {
+const Card = (props) => {
 
     const [isChecked, setChecked] = useState(false);
 
     const [isEdit, setEdit] = useState(false);
 
     const [caption, setCaption] = useState({
-        captionValue: 'The CNS'
+        captionValue: 'mike'
     });
 
     const [text, setText] = useState({
-        textValue: 'The brain and spinal cord are the organs of the central nervous system.'
+        textValue: props.cardInfo.text
     });
 
+    if (props.viewMode && isEdit) {
+        setEdit(!isEdit)
+    }
+
     const editMode = () => {
+        setCaption({captionValue: props.cardInfo.caption});
+        setText({textValue: props.cardInfo.text})
         setChecked(false);
         setEdit(!isEdit);
     };
 
-    let changedCaption;
-    let changedText;
-
     const saveChanges = () => {
-        setCaption({captionValue: changedCaption});
-        setText({textValue: changedText})
+        props.cardChanged(caption.captionValue, text.textValue);
         setEdit(!isEdit);
     };
 
@@ -42,36 +44,50 @@ const Card = () => {
 
     let captionView = (
         <div style={styleCaption}>
-            {!isEdit ?
-                <h4>{caption.captionValue}</h4> :
-                <textarea
-                    defaultValue={caption.captionValue}
-                    onChange={event => {
-                        changedCaption = event.target.value
-                    }}
+            {(!isEdit || props.viewMode) ?
+                <h4 onClick={() => setChecked(!isChecked)}>{props.cardInfo.caption}</h4> :
+                <input
+                    type="text"
+                    value={caption.captionValue}
+                    onChange={event => setCaption({captionValue: event.target.value})}
                 />
             }
             {!isEdit ?
                 <div>
-                    <button
-                        onClick={editMode}>
-                        <FaPencilAlt/>
-                    </button>
+                    {!props.viewMode &&
+                        <button
+                            onClick={editMode}>
+                            <FaPencilAlt/>
+                        </button>
+                    }
                     <input
                         type="checkbox"
                         checked={isChecked}
                         onChange={() => setChecked(!isChecked)}
                     />
                 </div> :
+
                 <div>
-                    <button
-                        onClick={saveChanges}>
-                        <FaSave/>
-                    </button>
-                    <button
-                        onClick={() => setEdit(!isEdit)}>
-                        <MdClear/>
-                    </button>
+                    {props.viewMode &&
+                        <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => setChecked(!isChecked)}
+                        />
+                    }
+
+                    {!props.viewMode &&
+                        <button
+                            onClick={saveChanges}>
+                            <FaSave/>
+                        </button>
+                    }
+                    {!props.viewMode &&
+                        <button
+                            onClick={() => setEdit(!isEdit)}>
+                            <MdClear/>
+                        </button>
+                    }
                 </div>
             }
         </div>
@@ -79,13 +95,11 @@ const Card = () => {
 
     let textView = (
         <div>
-            {!isEdit ?
-                <p>{text.textValue}</p> :
+            {(!isEdit || props.viewMode) ?
+                <p>{props.cardInfo.text}</p> :
                 <textarea
-                    defaultValue={text.textValue}
-                    onChange={event => {
-                        changedText = event.target.value
-                    }}
+                    value={text.textValue}
+                    onChange={event => setText({textValue: event.target.value})}
                 />}
         </div>
     );
