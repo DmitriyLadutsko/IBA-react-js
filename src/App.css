@@ -1,12 +1,15 @@
 .App {
-  width: 97%;
-  margin: auto;
-  /*text-align: center;*/
-  border: 2px solid #2f6060;
+    width: 97%;
+    margin: auto;
+    /*text-align: center;*/
+    border: 2px solid #2f6060;
 }
 
 main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
+
+
+
