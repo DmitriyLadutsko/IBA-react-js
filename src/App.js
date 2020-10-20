@@ -82,10 +82,12 @@ class App extends Component {
         const StyledLabel = styled.label.attrs(() => ({
             for: 'checkbox'
         }))`
-        color: grey;
-        border: 2px solid #2f6060;
+        color: darkmagenta;
+        border: double darkmagenta;
+        border-radius: 8px;
         margin: 20px;
         padding: 5px;
+        cursor: pointer;
         `;
 
         const StyledCheckbox = styled.input.attrs(() => ({
