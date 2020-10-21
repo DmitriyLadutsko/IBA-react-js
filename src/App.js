@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import './App.css';
+import styled from 'styled-components';
+
 import Header from './Header';
 import Card from './Card'
 
@@ -77,6 +79,31 @@ class App extends Component {
     };
 
     render() {
+        const StyledLabel = styled.label.attrs(() => ({
+            for: 'checkbox'
+        }))`
+        color: darkmagenta;
+        border: double darkmagenta;
+        border-radius: 8px;
+        margin: 20px;
+        padding: 5px;
+        cursor: pointer;
+        `;
+
+        const StyledCheckbox = styled.input.attrs(() => ({
+            id: 'checkbox',
+            type: 'checkbox',
+            checked: this.state.isViewMode,
+            onChange: this.toggleViewModeHandler
+        }))`
+        width: 18px;
+        height: 18px;
+            &:checked + ${StyledLabel} {
+              background: darkmagenta;
+              color: white;
+            }
+        `;
+
         const listCards = this.state.cards.map((card) =>
             <Card
                 key={card.id}
@@ -88,12 +115,10 @@ class App extends Component {
         return (
             <div className="App">
                 <Header/>
-                <label><i><b>View-only mode</b></i>
-                    <input
-                        type="checkbox"
-                        checked={this.state.isViewMode}
-                        onChange={this.toggleViewModeHandler}/>
-                </label>
+                <StyledCheckbox />
+                <StyledLabel>
+                    <i><b>View-only mode</b></i>
+                </StyledLabel>
                 <main>
                     {listCards}
                 </main>
