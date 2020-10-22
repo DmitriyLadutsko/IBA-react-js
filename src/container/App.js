@@ -103,6 +103,10 @@ class App extends Component {
         this.setState({ cards: newCards });
     }
 
+    addCardHandler =() => {
+
+    }
+
     render() {
         const StyledLabel = styled.label.attrs(() => ({
             htmlFor: 'checkbox'
@@ -113,17 +117,6 @@ class App extends Component {
         margin: 20px;
         padding: 5px;
         cursor: pointer;
-        `;
-
-        const StyledButton = styled.button.attrs(() => ({
-            onClick: this.cardDeleteHandler
-        }))`
-        color: darkmagenta;
-        background-color: #f3cfcf;
-        font-size: 16px;
-        border-radius: 8px;
-        margin: auto;
-        padding: 5px;
         &:hover {
             color: white;
             background-color: darkmagenta;
@@ -144,6 +137,38 @@ class App extends Component {
             }
         `;
 
+        const BlueButton = styled.button`
+        color: #2196f3;
+        background-color: #92c6ef59;
+        font-weight: bold;
+        font-size: 16px;
+        border: double #2196f3;
+        border-radius: 8px;
+        margin: auto;
+        padding: 5px;
+        &:hover {
+            color: white;
+            background-color: #2196f3;
+            
+        }
+        `;
+
+        const OrangeButton = styled.button`
+        color: #FF9800;
+        background-color: #f6ddb79c;
+        font-weight: bold;
+        font-size: 16px;
+        border: double #FF9800;
+        border-radius: 8px;
+        margin: auto 10px;
+        padding: 5px;
+        &:hover {
+            color: white;
+            background-color: #FF9800;
+            font-weight: bold;
+        }
+        `;
+
         return (
             <div className="App">
                 <Header/>
@@ -151,9 +176,12 @@ class App extends Component {
                 <StyledLabel >
                     <i><b>View-only mode</b></i>
                 </StyledLabel>
-                <StyledButton>
+                <BlueButton onClick={this.cardDeleteHandler} >
                     Remove Checked Cards
-                </StyledButton>
+                </BlueButton>
+                <OrangeButton onClick={this.addCardHandler} >
+                    Add Card
+                </OrangeButton>
                 <main>
                     <CardList
                         cards={this.state.cards}
