@@ -76,22 +76,23 @@ class App extends Component {
     }
 
     cardChangedHandler = id => (caption, text) => {
+        const { cards } = this.state;
 
-        const cardIndex = this.state.cards.findIndex(card => {
+        const cardIndex = cards.findIndex(card => {
             return card.id === id;
         });
-        const card = {...this.state.cards[cardIndex]};
+        const card = {...cards[cardIndex]};
 
         card.caption = caption;
         card.text = text;
 
-        const cards = [...this.state.cards];
-        cards[cardIndex] = card;
+        const newCards = [...cards];
+        newCards[cardIndex] = card;
 
-        this.setState({cards: cards})
+        this.setState({cards: newCards})
     };
 
-    cardActiveHandler = index => {
+    toggleCardActiveHandler = index => {
         const newCards = this.state.cards.map((card, i) => {
             if (i === index) {
                 return { ...card, isActive: !card.isActive };
@@ -148,18 +149,18 @@ class App extends Component {
             }
         `;
 
-        const BlueButton = styled.button`
-        color: #2196f3;
-        background-color: #92c6ef59;
+        const BrownButton = styled.button`
+        color: brown;
+        background-color: lightgrey;
         font-weight: bold;
         font-size: 16px;
-        border: double #2196f3;
+        border: double brown;
         border-radius: 8px;
         margin: auto;
         padding: 5px;
         &:hover {
             color: white;
-            background-color: #2196f3;
+            background-color: brown;
             
         }
         `;
@@ -187,9 +188,9 @@ class App extends Component {
                 <StyledLabel >
                     <i><b>View-only mode</b></i>
                 </StyledLabel>
-                <BlueButton onClick={this.cardDeleteHandler} >
+                <BrownButton onClick={this.cardDeleteHandler} >
                     Remove Checked Cards
-                </BlueButton>
+                </BrownButton>
                 <OrangeButton onClick={this.addCardHandler} >
                     Add Card
                 </OrangeButton>
@@ -198,7 +199,7 @@ class App extends Component {
                         cards={this.state.cards}
                         viewMode={this.state.isViewMode}
                         cardChanged={this.cardChangedHandler}
-                        activeChanged={this.cardActiveHandler}
+                        activeChanged={this.toggleCardActiveHandler}
                     />
                 </main>
             </div>
