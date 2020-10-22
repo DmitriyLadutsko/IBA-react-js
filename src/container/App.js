@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import CardList from '../components/CardList';
 
-// uuidv4();
 
 class App extends Component {
     state = {
@@ -150,8 +149,8 @@ class App extends Component {
         `;
 
         const BrownButton = styled.button`
-        color: brown;
-        background-color: lightgrey;
+        color: white;
+        background-color: brown;
         font-weight: bold;
         font-size: 16px;
         border: double brown;
@@ -159,15 +158,15 @@ class App extends Component {
         margin: auto;
         padding: 5px;
         &:hover {
-            color: white;
-            background-color: brown;
+            color: brown;
+            background-color: lightgrey;
             
         }
         `;
 
         const OrangeButton = styled.button`
-        color: #FF9800;
-        background-color: #f6ddb79c;
+        color: white;
+        background-color: #FF9800;
         font-weight: bold;
         font-size: 16px;
         border: double #FF9800;
@@ -175,9 +174,8 @@ class App extends Component {
         margin: auto 10px;
         padding: 5px;
         &:hover {
-            color: white;
-            background-color: #FF9800;
-            font-weight: bold;
+            color: #FF9800;
+            background-color: #f6ddb79c;
         }
         `;
 
