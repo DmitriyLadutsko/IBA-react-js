@@ -64,7 +64,6 @@ class App extends Component {
             },
         ],
         isViewMode: false,
-        isDelete: false
     }
 
     toggleViewModeHandler = () => {
@@ -158,7 +157,6 @@ class App extends Component {
                 <main>
                     <CardList
                         cards={this.state.cards}
-                        doesDelete={this.state.isDelete}
                         viewMode={this.state.isViewMode}
                         cardChanged={this.cardChangedHandler}
                         activeChanged={this.cardActiveHandler}
