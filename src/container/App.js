@@ -23,44 +23,44 @@ class App extends Component {
             {
                 id: '13',
                 caption: 'Endocrine System',
+                text: 'The endocrine system, along with the nervous system, functions in the regulation of body activities.',
                 isActive: false,
-                text: 'The endocrine system, along with the nervous system, functions in the regulation of body activities.'
             },
             {
                 id: '14',
                 caption: 'Cardiovascular System',
+                text: 'The cardiovascular system is sometimes called the blood-vascular, or simply the circulatory, system.',
                 isActive: false,
-                text: 'The cardiovascular system is sometimes called the blood-vascular, or simply the circulatory, system.'
             },
             {
                 id: '19',
                 caption: 'Respiratory System',
+                text: 'When the respiratory system is mentioned, people generally think of breathing, but breathing is only one of the activities of the respiratory system.',
                 isActive: false,
-                text: 'When the respiratory system is mentioned, people generally think of breathing, but breathing is only one of the activities of the respiratory system.'
             },
             {
                 id: '15',
                 caption: 'Digestive System',
+                text: 'The digestive system includes the digestive tract and its accessory organs, which process food into molecules that can be absorbed and utilized by the cells of the body.',
                 isActive: false,
-                text: 'The digestive system includes the digestive tract and its accessory organs, which process food into molecules that can be absorbed and utilized by the cells of the body. '
             },
             {
                 id: '16',
                 caption: 'Skeletal System',
+                text: 'Humans are vertebrates, animals having a vertabral column or backbone.',
                 isActive: false,
-                text: 'Humans are vertebrates, animals having a vertabral column or backbone.'
             },
             {
                 id: '17',
                 caption: 'Reproductive System',
+                text: 'The major function of the reproductive system is to ensure survival of the species.',
                 isActive: false,
-                text: 'The major function of the reproductive system is to ensure survival of the species.'
             },
             {
                 id: '18',
                 caption: 'Urinary System',
+                text: 'The principal function of the urinary system is to maintain the volume and composition of body fluids within normal limits.',
                 isActive: false,
-                text: 'The principal function of the urinary system is to maintain the volume and composition of body fluids within normal limits.'
             },
         ],
         isViewMode: false,
@@ -105,7 +105,7 @@ class App extends Component {
 
     render() {
         const StyledLabel = styled.label.attrs(() => ({
-            for: 'checkbox'
+            htmlFor: 'checkbox'
         }))`
         color: darkmagenta;
         border: double darkmagenta;
@@ -148,7 +148,7 @@ class App extends Component {
             <div className="App">
                 <Header/>
                 <StyledCheckbox />
-                <StyledLabel>
+                <StyledLabel >
                     <i><b>View-only mode</b></i>
                 </StyledLabel>
                 <StyledButton>

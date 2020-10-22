@@ -1,18 +1,13 @@
-import React, {Fragment} from "react";
+import React from "react";
 
 const CardHeader = (props) => {
-    return (
-        <Fragment>
-            {(!props.doesEdit || props.viewMode) ?
-                <h4>{props.cardInfo.caption}</h4> :
-                <input
-                    type="text"
-                    value={props.inputCaptionValue}
-                    onChange={props.changeCaption}
-                />
-            }
-        </Fragment>
-    );
+    return !props.doesEdit || props.viewMode ?
+        <h4>{props.cardInfo.caption}</h4> :
+        <input
+            type="text"
+            value={props.inputCaptionValue}
+            onChange={props.changeCaption}
+        />;
 };
 
 export default CardHeader;

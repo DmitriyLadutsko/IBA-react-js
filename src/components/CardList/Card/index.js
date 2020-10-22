@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from "react";
+import React, {useState} from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import './Card.css';
@@ -43,7 +43,7 @@ const Card = (props) => {
     };
 
     let buttons = (
-        <Fragment>
+        <>
             {!isEdit ?
                 <div>
                     {!props.viewMode &&
@@ -82,7 +82,7 @@ const Card = (props) => {
                     }
                 </div>
             }
-        </Fragment>
+        </>
     );
 
     const styleCaption = {
