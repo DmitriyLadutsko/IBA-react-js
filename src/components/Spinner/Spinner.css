@@ -1,0 +1,53 @@
+@keyframes ldio-os0bggct9-r {
+    0%, 100% { animation-timing-function: cubic-bezier(0.2, 0, 0.8, 0.8) }
+    50% { animation-timing-function: cubic-bezier(0.2, 0.2, 0.8, 1) }
+    0% { transform: rotate(0deg) }
+    50% { transform: rotate(180deg) }
+    100% { transform: rotate(360deg) }
+}
+@keyframes ldio-os0bggct9-s {
+    0%, 100% { animation-timing-function: cubic-bezier(0.2, 0, 0.8, 0.8) }
+    50% { animation-timing-function: cubic-bezier(0.2, 0.2, 0.8, 1) }
+    0% { transform: translate(-27px,-27px) scale(0) }
+    50% { transform: translate(-27px,-27px) scale(1) }
+    100% { transform: translate(-27px,-27px) scale(0) }
+}
+.ldio-os0bggct9 > div { transform: translate(0px,-13.5px) }
+.ldio-os0bggct9 > div > div {
+    animation: ldio-os0bggct9-r 1.1904761904761905s linear infinite;
+    transform-origin: 90px 90px;
+}
+.ldio-os0bggct9 > div > div > div {
+    position: absolute;
+    transform: translate(90px, 74px);
+}
+.ldio-os0bggct9 > div > div > div > div {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #281300;
+    animation: ldio-os0bggct9-s 1.1904761904761905s linear infinite;
+}
+.ldio-os0bggct9 > div > div:last-child {
+    animation-delay: -0.5952380952380952s;
+}
+.ldio-os0bggct9 > div > div:last-child > div > div {
+    animation-delay: -0.5952380952380952s;
+    background: #e26c00;
+}
+.loadingio-spinner-interwind-jp4009qvjv {
+    width: 180px;
+    height: 180px;
+    display: inline-block;
+    overflow: hidden;
+    background: none;
+}
+.ldio-os0bggct9 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+}
+.ldio-os0bggct9 div { box-sizing: content-box; }

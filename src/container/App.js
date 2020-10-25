@@ -67,6 +67,7 @@ class App extends Component {
             },
         ],
         isViewMode: false,
+        isAddCard: false
     }
 
     toggleViewModeHandler = () => {
@@ -115,7 +116,7 @@ class App extends Component {
             isActive: false
         };
         const newCards = [...this.state.cards, card];
-        this.setState({ cards: newCards });
+        this.setState({ cards: newCards, isAddCard: !this.state.isAddCard });
     }
 
     render() {
@@ -198,6 +199,7 @@ class App extends Component {
                         viewMode={this.state.isViewMode}
                         cardChanged={this.cardChangedHandler}
                         activeChanged={this.toggleCardActiveHandler}
+                        onAddCard={this.state.isAddCard}
                     />
                 </main>
             </div>
