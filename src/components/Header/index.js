@@ -1,9 +1,17 @@
-import React from "react";
-import './Header.css'
+import React, {useContext} from "react";
+import './Header.css';
+import CounterContext from '../../context/cardsContext';
 
 const Header = () => {
+    const counterContext = useContext(CounterContext);
+
     return (
-        <h1 className="Header">human body systems</h1>
+        <div className="Header">
+            <h1 style={{fontWeight: '400'}}>human body systems</h1>
+            <span className="counter">
+                {counterContext.cards.length}
+            </span>
+        </div>
     );
 };
 

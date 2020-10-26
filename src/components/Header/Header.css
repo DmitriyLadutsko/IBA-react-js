@@ -1,12 +1,22 @@
 .Header {
     text-align: center;
     width: 100%;
-    height: 70px;
+    height: 90px;
     margin: auto;
-    padding-top: 1.5rem;
+    padding-top: 2px;
     background-color: #f3cfcf;
     color: #1c3e3e;
-    font-weight: 400;
     letter-spacing: 5px;
     text-transform: uppercase;
+}
+
+.counter {
+    position: absolute;
+    right: 120px;
+    top: 40px;
+    color: #fff;
+    background-color: #28a745;
+    padding-right: .3em;
+    padding-left: .6em;
+    border-radius: 10rem;
 }

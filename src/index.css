@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 input {
   margin: 25px 0 25px 10px;
 }
@@ -45,3 +49,4 @@ button {
   color: white;
   background-color: darkmagenta;
 }
+

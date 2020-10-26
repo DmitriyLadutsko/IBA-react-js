@@ -1,7 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import withLoadingDelay from "../../../hoc/withLoadingDelay";
+import PropTypes from 'prop-types';
+import CounterContext from '../../../context/cardsContext';
+
 import './Card.css';
 
 import {FaPencilAlt} from 'react-icons/fa';
@@ -9,6 +12,7 @@ import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
 
 const Card = (props) => {
+    const cardsContext = useContext(CounterContext);
 
     const [isChecked, setChecked] = useState(false);
 
@@ -40,7 +44,7 @@ const Card = (props) => {
 
     const activatedCard = () => {
         setChecked(!isChecked);
-        props.activeCard(props.cardIndex);
+        cardsContext.toggleCardActive(props.cardIndex);
     };
 
     let buttons = (
@@ -114,5 +118,16 @@ const Card = (props) => {
         </div>
     );
 };
+
+Card.propTypes = {
+    activeCard: PropTypes.func.isRequired,
+    cardChanged: PropTypes.func.isRequired,
+    viewMode: PropTypes.bool.isRequired,
+    cardIndex: PropTypes.number,
+    cardInfo: PropTypes.shape({
+        caption: PropTypes.string,
+        text: PropTypes.string
+    }),
+}
 
 export default withLoadingDelay(Card);

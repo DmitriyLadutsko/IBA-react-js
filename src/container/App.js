@@ -1,11 +1,12 @@
 import React, {Component} from "react";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 import './App.css';
 import styled from 'styled-components';
 
 import Header from '../components/Header';
 import CardList from '../components/CardList';
+import CounterContext from '../context/cardsContext'
 
 
 class App extends Component {
@@ -74,8 +75,8 @@ class App extends Component {
         this.setState({isViewMode: !doesShow});
     }
 
-    cardChangedHandler = id => (caption, text) => {
-        const { cards } = this.state;
+    changedCardHandler = id => (caption, text) => {
+        const {cards} = this.state;
 
         const cardIndex = cards.findIndex(card => {
             return card.id === id;
@@ -94,21 +95,21 @@ class App extends Component {
     toggleCardActiveHandler = index => {
         const newCards = this.state.cards.map((card, i) => {
             if (i === index) {
-                return { ...card, isActive: !card.isActive };
+                return {...card, isActive: !card.isActive};
             } else {
                 return {...card};
             }
         });
-        this.setState({ cards: newCards });
+        this.setState({cards: newCards});
     };
 
-    cardDeleteHandler = () => {
+    deleteCardHandler = () => {
         const newCards = this.state.cards.filter((card) => !card.isActive);
-        this.setState({ cards: newCards });
+        this.setState({cards: newCards});
     }
 
-    addCardHandler =() => {
-        const { cards, isAddCard } = this.state;
+    addCardHandler = () => {
+        const {cards, isAddCard} = this.state;
 
         const card = {
             id: uuidv4(),
@@ -117,7 +118,7 @@ class App extends Component {
             isActive: false
         };
         const newCards = [...cards, card];
-        this.setState({ cards: newCards, isAddCard: !isAddCard });
+        this.setState({cards: newCards, isAddCard: !isAddCard});
     }
 
     render() {
@@ -183,25 +184,30 @@ class App extends Component {
 
         return (
             <div className="App">
-                <Header/>
-                <StyledCheckbox />
-                <StyledLabel >
-                    <i><b>View-only mode</b></i>
-                </StyledLabel>
-                <BrownButton onClick={this.cardDeleteHandler} >
-                    Remove Checked Cards
-                </BrownButton>
-                <OrangeButton onClick={this.addCardHandler} >
-                    Add Card
-                </OrangeButton>
-                <main>
-                    <CardList
-                        cards={this.state.cards}
-                        viewMode={this.state.isViewMode}
-                        cardChanged={this.cardChangedHandler}
-                        activeChanged={this.toggleCardActiveHandler}
-                    />
-                </main>
+                <CounterContext.Provider value={{
+                    cards: this.state.cards,
+                    changeCard: this.changedCardHandler,
+                    addCard: this.addCardHandler,
+                    deleteCard: this.deleteCardHandler,
+                    toggleCardActive: this.toggleCardActiveHandler,
+                }}>
+                    <Header/>
+                    <StyledCheckbox/>
+                    <StyledLabel>
+                        <i><b>View-only mode</b></i>
+                    </StyledLabel>
+                    <BrownButton onClick={this.deleteCardHandler}>
+                        Remove Checked Cards
+                    </BrownButton>
+                    <OrangeButton onClick={this.addCardHandler}>
+                        Add Card
+                    </OrangeButton>
+                    <main>
+                        <CardList
+                            viewMode={this.state.isViewMode}
+                        />
+                    </main>
+                </CounterContext.Provider>
             </div>
         );
     }
