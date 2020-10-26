@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
+import withLoadingDelay from "../../../hoc/withLoadingDelay";
 import './Card.css';
 
 import {FaPencilAlt} from 'react-icons/fa';
@@ -114,4 +115,4 @@ const Card = (props) => {
     );
 };
 
-export default Card;
+export default withLoadingDelay(Card);
