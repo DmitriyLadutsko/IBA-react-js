@@ -10,7 +10,7 @@ const withLoadingDelay = LoadingComponent => props => {
         setTimeout(() => {
             setLoad(true)
         }, 2000)
-    }, [props.onAddCard]);
+    }, []);
 
     return isLoad ? <LoadingComponent {...props}/> : <Spinner/>
 };

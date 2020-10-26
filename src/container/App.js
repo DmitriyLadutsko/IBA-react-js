@@ -109,14 +109,16 @@ class App extends Component {
     }
 
     addCardHandler =() => {
+        const { cards, isAddCard } = this.state;
+
         const card = {
             id: uuidv4(),
             caption: '',
             text: '',
             isActive: false
         };
-        const newCards = [...this.state.cards, card];
-        this.setState({ cards: newCards, isAddCard: !this.state.isAddCard });
+        const newCards = [...cards, card];
+        this.setState({ cards: newCards, isAddCard: !isAddCard });
     }
 
     render() {

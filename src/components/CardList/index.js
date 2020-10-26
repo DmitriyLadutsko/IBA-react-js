@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import withLoadingDelay from "../../hoc/withLoadingDelay";
+// import withLoadingDelay from "../../hoc/withLoadingDelay";
 
 const CardList = (props) => {
     return props.cards.map((card, index) => {
@@ -17,4 +17,4 @@ const CardList = (props) => {
     });
 }
 
-export default withLoadingDelay(CardList);
+export default CardList;
