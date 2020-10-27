@@ -1,125 +1,13 @@
 import React, {Component} from "react";
-import {v4 as uuidv4} from 'uuid';
 
 import './App.css';
 import styled from 'styled-components';
 
+import {CardContextConsumer} from '../context/Context';
 import Header from '../components/Header';
 import CardList from '../components/CardList';
-import CardsContext from '../context/cardsContext'
-
 
 class App extends Component {
-    state = {
-        cards: [
-            {
-                id: uuidv4(),
-                caption: 'Nervous System',
-                text: 'The nervous system is the major controlling, regulatory, and communicating system in the body.',
-                isActive: false
-            },
-            {
-                id: uuidv4(),
-                caption: 'Muscular System',
-                text: 'The muscular system is composed of specialized cells called muscle fibers.',
-                isActive: false,
-            },
-            {
-                id: uuidv4(),
-                caption: 'Endocrine System',
-                text: 'The endocrine system, along with the nervous system, functions in the regulation of body activities.',
-                isActive: false,
-            },
-            {
-                id: uuidv4(),
-                caption: 'Cardiovascular System',
-                text: 'The cardiovascular system is sometimes called the blood-vascular, or simply the circulatory, system.',
-                isActive: false,
-            },
-            {
-                id: uuidv4(),
-                caption: 'Respiratory System',
-                text: 'When the respiratory system is mentioned, people generally think of breathing, but breathing is only one of the activities of the respiratory system.',
-                isActive: false,
-            },
-            {
-                id: uuidv4(),
-                caption: 'Digestive System',
-                text: 'The digestive system includes the digestive tract and its accessory organs, which process food into molecules that can be absorbed and utilized by the cells of the body.',
-                isActive: false,
-            },
-            {
-                id: uuidv4(),
-                caption: 'Skeletal System',
-                text: 'Humans are vertebrates, animals having a vertabral column or backbone.',
-                isActive: false,
-            },
-            {
-                id: uuidv4(),
-                caption: 'Reproductive System',
-                text: 'The major function of the reproductive system is to ensure survival of the species.',
-                isActive: false,
-            },
-            {
-                id: uuidv4(),
-                caption: 'Urinary System',
-                text: 'The principal function of the urinary system is to maintain the volume and composition of body fluids within normal limits.',
-                isActive: false,
-            },
-        ],
-        isViewMode: false,
-    }
-
-    toggleViewModeHandler = () => {
-        const doesShow = this.state.isViewMode;
-        this.setState({isViewMode: !doesShow});
-    }
-
-    changedCardHandler = id => (caption, text) => {
-        const {cards} = this.state;
-
-        const cardIndex = cards.findIndex(card => {
-            return card.id === id;
-        });
-        const card = {...cards[cardIndex]};
-
-        card.caption = caption;
-        card.text = text;
-
-        const newCards = [...cards];
-        newCards[cardIndex] = card;
-
-        this.setState({cards: newCards})
-    };
-
-    toggleCardActiveHandler = index => {
-        const newCards = this.state.cards.map((card, i) => {
-            if (i === index) {
-                return {...card, isActive: !card.isActive};
-            } else {
-                return {...card};
-            }
-        });
-        this.setState({cards: newCards});
-    };
-
-    deleteCardHandler = () => {
-        const newCards = this.state.cards.filter((card) => !card.isActive);
-        this.setState({cards: newCards});
-    }
-
-    addCardHandler = () => {
-        const {cards, isAddCard} = this.state;
-
-        const card = {
-            id: uuidv4(),
-            caption: '',
-            text: '',
-            isActive: false
-        };
-        const newCards = [...cards, card];
-        this.setState({cards: newCards, isAddCard: !isAddCard});
-    }
 
     render() {
         const StyledLabel = styled.label.attrs(() => ({
@@ -140,8 +28,6 @@ class App extends Component {
         const StyledCheckbox = styled.input.attrs(() => ({
             id: 'checkbox',
             type: 'checkbox',
-            checked: this.state.isViewMode,
-            onChange: this.toggleViewModeHandler
         }))`
         width: 18px;
         height: 18px;
@@ -183,35 +69,31 @@ class App extends Component {
         `;
 
         return (
-            <div className="App">
-                <CardsContext.Provider value={{
-                    cards: this.state.cards,
-                    changeCard: this.changedCardHandler,
-                    addCard: this.addCardHandler,
-                    deleteCard: this.deleteCardHandler,
-                    toggleCardActive: this.toggleCardActiveHandler,
-                }}>
-                    <Header/>
-                    <StyledCheckbox/>
-                    <StyledLabel>
-                        <i><b>View-only mode</b></i>
-                    </StyledLabel>
-                    <BrownButton onClick={this.deleteCardHandler}>
-                        Remove Checked Cards
-                    </BrownButton>
-                    <OrangeButton onClick={this.addCardHandler}>
-                        Add Card
-                    </OrangeButton>
-                    <main>
-                        <CardList
-                            viewMode={this.state.isViewMode}
+            <CardContextConsumer>
+                {({cards, onlyView, onCheckBoxApp, onRemove, onAdd}) => (
+                    <div className="App">
+                        <Header/>
+                        <StyledCheckbox
+                            checked={onlyView}
+                            onChange={onCheckBoxApp}
                         />
-                    </main>
-                </CardsContext.Provider>
-            </div>
+                        <StyledLabel>
+                            <i><b>View-only mode</b></i>
+                        </StyledLabel>
+                        <BrownButton onClick={onRemove}>
+                            Remove Checked Cards
+                        </BrownButton>
+                        <OrangeButton onClick={onAdd}>
+                            Add Card
+                        </OrangeButton>
+                        <main>
+                            <CardList cards={cards}/>
+                        </main>
+                    </div>
+                )}
+            </CardContextConsumer>
         );
     }
-
 }
 
 export default App;

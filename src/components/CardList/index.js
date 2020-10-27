@@ -1,21 +1,26 @@
-import React, {useContext} from "react";
+import React from "react";
 import Card from "./Card";
-import CardsContext from '../../context/cardsContext';
+import {CardContextConsumer} from '../../context/Context';
 
-const CardList = (props) => {
-    const cardsContext = useContext(CardsContext);
-
-    return cardsContext.cards.map((card, index) => {
-            return (
-                <Card
-                    cardIndex={index}
-                    key={card.id}
-                    cardInfo={card}
-                    viewMode={props.viewMode}
-                    cardChanged={cardsContext.changeCard(card.id)}
-                />
-            );
-    });
+const CardList = () => {
+    return (
+        <CardContextConsumer>
+            {({cards, onlyView, changeCard, removeCard}) => (
+                cards.map((card) => {
+                        return (
+                            <Card
+                                key={card.id}
+                                card={card}
+                                onlyView={onlyView}
+                                changeCard={changeCard(card.id)}
+                                removeCard={removeCard}
+                            />
+                        )
+                    }
+                )
+            )}
+        </CardContextConsumer>
+    );
 }
 
 export default CardList;

@@ -1,16 +1,14 @@
-import React, {useContext} from "react";
+import React from "react";
 import './Header.css';
-import CardsContext from '../../context/cardsContext';
+import {CardContextConsumer} from '../../context/Context';
 
 const Header = () => {
-    const cardsContext = useContext(CardsContext);
-
     return (
         <div className="Header">
             <h1 style={{fontWeight: '400'}}>human body systems</h1>
-            <span className="counter">
-                {cardsContext.cards.length}
-            </span>
+            <CardContextConsumer>
+                {({cardsCount}) => <span className="counter">{cardsCount}</span>}
+            </CardContextConsumer>
         </div>
     );
 };
