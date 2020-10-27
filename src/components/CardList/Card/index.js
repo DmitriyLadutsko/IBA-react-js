@@ -3,7 +3,7 @@ import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import withLoadingDelay from "../../../hoc/withLoadingDelay";
 import PropTypes from 'prop-types';
-import CounterContext from '../../../context/cardsContext';
+import CardsContext from '../../../context/cardsContext';
 
 import './Card.css';
 
@@ -12,9 +12,9 @@ import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
 
 const Card = (props) => {
-    const cardsContext = useContext(CounterContext);
+    const cardsContext = useContext(CardsContext);
 
-    const [isChecked, setChecked] = useState(false);
+    const [isChecked, setChecked] = useState(props.cardInfo.isActive);
 
     const [isEdit, setEdit] = useState(false);
 
@@ -120,13 +120,13 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-    activeCard: PropTypes.func.isRequired,
     cardChanged: PropTypes.func.isRequired,
     viewMode: PropTypes.bool.isRequired,
     cardIndex: PropTypes.number,
     cardInfo: PropTypes.shape({
         caption: PropTypes.string,
-        text: PropTypes.string
+        text: PropTypes.string,
+        isActive: PropTypes.bool
     }),
 }
 

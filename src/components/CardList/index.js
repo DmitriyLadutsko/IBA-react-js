@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
 import Card from "./Card";
-import CounterContext from '../../context/cardsContext';
+import CardsContext from '../../context/cardsContext';
 
 const CardList = (props) => {
-    const cardsContext = useContext(CounterContext);
+    const cardsContext = useContext(CardsContext);
 
     return cardsContext.cards.map((card, index) => {
             return (

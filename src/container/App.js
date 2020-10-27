@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import Header from '../components/Header';
 import CardList from '../components/CardList';
-import CounterContext from '../context/cardsContext'
+import CardsContext from '../context/cardsContext'
 
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
                 id: uuidv4(),
                 caption: 'Muscular System',
                 text: 'The muscular system is composed of specialized cells called muscle fibers.',
-                isActive: false
+                isActive: false,
             },
             {
                 id: uuidv4(),
@@ -184,7 +184,7 @@ class App extends Component {
 
         return (
             <div className="App">
-                <CounterContext.Provider value={{
+                <CardsContext.Provider value={{
                     cards: this.state.cards,
                     changeCard: this.changedCardHandler,
                     addCard: this.addCardHandler,
@@ -207,7 +207,7 @@ class App extends Component {
                             viewMode={this.state.isViewMode}
                         />
                     </main>
-                </CounterContext.Provider>
+                </CardsContext.Provider>
             </div>
         );
     }
