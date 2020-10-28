@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import withLoadingDelay from "../../../hoc/withLoadingDelay";
+import PropTypes from 'prop-types';
+
 import './Card.css';
 
 import {FaPencilAlt} from 'react-icons/fa';
@@ -9,45 +11,46 @@ import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
 
 const Card = (props) => {
+    const {card, onlyView, changeCard, removeCard} = props;
 
     const [isChecked, setChecked] = useState(false);
 
     const [isEdit, setEdit] = useState(false);
 
     const [caption, setCaption] = useState({
-        captionValue: props.cardInfo.caption
+        captionValue: card.caption
     });
 
     const [text, setText] = useState({
-        textValue: props.cardInfo.text
+        textValue: card.text
     });
 
-    if (props.viewMode && isEdit) {
+    if (onlyView && isEdit) {
         setEdit(!isEdit)
     }
 
     const editMode = () => {
-        setCaption({captionValue: props.cardInfo.caption});
-        setText({textValue: props.cardInfo.text})
+        setCaption({captionValue: card.caption});
+        setText({textValue: card.text})
         setChecked(false);
         setEdit(!isEdit);
     };
 
     const saveChanges = () => {
-        props.cardChanged(caption.captionValue, text.textValue);
+        changeCard(caption.captionValue, text.textValue);
         setEdit(!isEdit);
     };
 
     const activatedCard = () => {
         setChecked(!isChecked);
-        props.activeCard(props.cardIndex);
+        removeCard(card.id, !isChecked);
     };
 
     let buttons = (
         <>
             {!isEdit ?
                 <div>
-                    {!props.viewMode &&
+                    {!onlyView &&
                     <button
                         onClick={editMode}>
                         <FaPencilAlt/>
@@ -61,7 +64,7 @@ const Card = (props) => {
                 </div> :
 
                 <div>
-                    {props.viewMode &&
+                    {onlyView &&
                     <input
                         type="checkbox"
                         checked={isChecked}
@@ -69,13 +72,13 @@ const Card = (props) => {
                     />
                     }
 
-                    {!props.viewMode &&
+                    {!onlyView &&
                     <button
                         onClick={saveChanges}>
                         <FaSave/>
                     </button>
                     }
-                    {!props.viewMode &&
+                    {!onlyView &&
                     <button
                         onClick={() => setEdit(!isEdit)}>
                         <MdClear/>
@@ -113,6 +116,16 @@ const Card = (props) => {
             />
         </div>
     );
+};
+
+Card.propTypes = {
+    onlyView: PropTypes.bool.isRequired,
+    changeCard: PropTypes.func.isRequired,
+    removeCard: PropTypes.func.isRequired,
+    card: PropTypes.shape({
+        caption: PropTypes.string,
+        text: PropTypes.string,
+    }),
 };
 
 export default withLoadingDelay(Card);

@@ -1,9 +1,15 @@
 import React from "react";
-import './Header.css'
+import './Header.css';
+import {CardContextConsumer} from '../../context/Context';
 
 const Header = () => {
     return (
-        <h1 className="Header">human body systems</h1>
+        <div className="Header">
+            <h1 style={{fontWeight: '400'}}>human body systems</h1>
+            <CardContextConsumer>
+                {({cardsCount}) => <span className="counter">{cardsCount}</span>}
+            </CardContextConsumer>
+        </div>
     );
 };
 
