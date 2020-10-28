@@ -70,7 +70,7 @@ class App extends Component {
 
         return (
             <CardContextConsumer>
-                {({onlyView, onCheckBoxApp, onRemove, onAdd, error}) => (
+                {({cards, onlyView, onCheckBoxApp, onRemove, onAdd, error}) => (
                     <div className="App">
                         <Header/>
                         <StyledCheckbox
@@ -87,7 +87,7 @@ class App extends Component {
                             Add Card
                         </OrangeButton>
                         <main>
-                            <CardList error={error} />
+                            <CardList error={error} cards={cards} />
                         </main>
                     </div>
                 )}

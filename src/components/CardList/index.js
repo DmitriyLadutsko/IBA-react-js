@@ -1,12 +1,13 @@
 import React from "react";
 import Card from "./Card";
+import Spinner from "../Spinner";
 import {CardContextConsumer} from '../../context/Context';
 
-const CardList = ({error}) => {
-    let cardsView = <p
-        style={{textAlign: 'center', color: 'red', fontSize: '1.7rem'}}>
-        failed to get pokemon
-    </p>;
+const CardList = ({cards, error}) => {
+    let cardsView =
+        <p style={{textAlign: 'center', color: 'red', fontSize: '1.7rem'}}>
+            failed to get pokemon
+        </p>;
 
     if (!error) {
         cardsView = <CardContextConsumer>
@@ -27,7 +28,7 @@ const CardList = ({error}) => {
         </CardContextConsumer>
     }
 
-    return cardsView;
+    return (cards.length !== 0) ? cardsView : <Spinner/>;
 }
 
 export default CardList;

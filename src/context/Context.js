@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
 
 const {Provider, Consumer} = React.createContext(undefined);
@@ -10,7 +9,7 @@ class CardContextProvider extends Component {
     state = {
         cards: [],
         onlyView: false,
-        error: false
+        error: false,
     };
 
     cardsToRemove = [];
@@ -24,11 +23,11 @@ class CardContextProvider extends Component {
             .then(response => {
                 const min = this.state.cards.length;
                 const max = response.data.length;
-                const rndId = Math.floor(Math.random() * (max - min + 1) + min);
+                const rndId = Math.floor(Math.random() * (max - min) + min);
 
                 const card = this._transformPokemon(response.data[rndId]);
                 const newCards = [...this.state.cards, card];
-                this.setState({cards: newCards});
+                this.setState({cards: newCards, loadingCard: !this.state.loadingCard});
             })
             .catch(err => this.setState({error: true}));
     };
@@ -70,13 +69,16 @@ class CardContextProvider extends Component {
     };
 
     componentDidMount() {
-        axios.get(this._url)
-            .then(response => {
-                const pokemons = response.data.slice(0, 15);
-                const cards = pokemons.map(this._transformPokemon)
-                this.setState({cards: cards})
-            })
-            .catch(err => this.setState({error: true}));
+        setTimeout(() => {
+            axios.get(this._url)
+                .then(response => {
+                    const pokemons = response.data.slice(0, 15);
+                    const cards = pokemons.map(this._transformPokemon)
+                    this.setState({cards: cards})
+                })
+                .catch(err => this.setState({error: true}));
+            }, 1000
+        )
     };
 
     render() {
@@ -90,7 +92,7 @@ class CardContextProvider extends Component {
                 removeCard: this.cardToRemoveHandler,
                 onRemove: this.removeCardHandler,
                 changeCard: this.changeCardHandler,
-                error: this.state.error
+                error: this.state.error,
             }}>
                 {this.props.children}
             </Provider>
