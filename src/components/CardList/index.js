@@ -2,9 +2,14 @@ import React from "react";
 import Card from "./Card";
 import {CardContextConsumer} from '../../context/Context';
 
-const CardList = () => {
-    return (
-        <CardContextConsumer>
+const CardList = ({error}) => {
+    let cardsView = <p
+        style={{textAlign: 'center', color: 'red', fontSize: '1.7rem'}}>
+        failed to get pokemon
+    </p>;
+
+    if (!error) {
+        cardsView = <CardContextConsumer>
             {({cards, onlyView, changeCard, removeCard}) => (
                 cards.map((card) => {
                         return (
@@ -20,7 +25,9 @@ const CardList = () => {
                 )
             )}
         </CardContextConsumer>
-    );
+    }
+
+    return cardsView;
 }
 
 export default CardList;

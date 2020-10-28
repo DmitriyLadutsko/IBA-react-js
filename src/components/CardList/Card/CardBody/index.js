@@ -8,6 +8,7 @@ const CardBody = (props) => {
             {!doesEdit ?
                 <p>{card.text}</p> :
                 <textarea
+                    rows="3"
                     value={inputTextValue}
                     onChange={changeText}
                 />}
