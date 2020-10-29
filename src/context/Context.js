@@ -19,17 +19,15 @@ class CardContextProvider extends Component {
     };
 
     addCardHandler = () => {
-        axios.get(this._url)
-            .then(response => {
-                const min = this.state.cards.length;
-                const max = response.data.length;
-                const rndId = Math.floor(Math.random() * (max - min) + min);
-
-                const card = this._transformPokemon(response.data[rndId]);
-                const newCards = [...this.state.cards, card];
-                this.setState({cards: newCards, loadingCard: !this.state.loadingCard});
-            })
-            .catch(err => this.setState({error: true}));
+        const cards = [...this.state.cards];
+        const lastCard = cards[cards.length - 1];
+        const newCard = {
+            id: '' + (+lastCard.id + 1),
+            caption: 'This is a new Card',
+            text: 'Card description',
+        };
+        cards.push(newCard);
+        this.setState({cards: cards});
     };
 
     cardToRemoveHandler = (id, state) => {
@@ -69,16 +67,13 @@ class CardContextProvider extends Component {
     };
 
     componentDidMount() {
-        setTimeout(() => {
-            axios.get(this._url)
-                .then(response => {
-                    const pokemons = response.data.slice(0, 15);
-                    const cards = pokemons.map(this._transformPokemon)
-                    this.setState({cards: cards})
-                })
-                .catch(err => this.setState({error: true}));
-            }, 1000
-        )
+        axios.get(this._url)
+            .then(response => {
+                const pokemons = response.data.slice(0, 15);
+                const cards = pokemons.map(this._transformPokemon)
+                this.setState({cards: cards})
+            })
+            .catch(() => this.setState({error: true}));
     };
 
     render() {
