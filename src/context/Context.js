@@ -1,58 +1,15 @@
 import React, {Component} from "react";
-import {v4 as uuidv4} from 'uuid';
+import axios from 'axios';
 
 const {Provider, Consumer} = React.createContext(undefined);
 
 class CardContextProvider extends Component {
+    _url = 'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+
     state = {
-        cards: [
-            {
-                id: uuidv4(),
-                caption: 'Nervous System',
-                text: 'The nervous system is the major controlling, regulatory, and communicating system in the body.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Muscular System',
-                text: 'The muscular system is composed of specialized cells called muscle fibers.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Endocrine System',
-                text: 'The endocrine system, along with the nervous system, functions in the regulation of body activities.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Cardiovascular System',
-                text: 'The cardiovascular system is sometimes called the blood-vascular, or simply the circulatory, system.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Respiratory System',
-                text: 'When the respiratory system is mentioned, people generally think of breathing, but breathing is only one of the activities of the respiratory system.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Digestive System',
-                text: 'The digestive system includes the digestive tract and its accessory organs, which process food into molecules that can be absorbed and utilized by the cells of the body.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Skeletal System',
-                text: 'Humans are vertebrates, animals having a vertabral column or backbone.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Reproductive System',
-                text: 'The major function of the reproductive system is to ensure survival of the species.',
-            },
-            {
-                id: uuidv4(),
-                caption: 'Urinary System',
-                text: 'The principal function of the urinary system is to maintain the volume and composition of body fluids within normal limits.',
-            },
-        ],
-        onlyView: false
+        cards: [],
+        onlyView: false,
+        error: false,
     };
 
     cardsToRemove = [];
@@ -62,13 +19,15 @@ class CardContextProvider extends Component {
     };
 
     addCardHandler = () => {
-        const card = {
-            id: uuidv4(),
+        const cards = [...this.state.cards];
+        const lastCard = cards[cards.length - 1];
+        const newCard = {
+            id: '' + (+lastCard.id + 1),
             caption: 'This is a new Card',
             text: 'Card description',
         };
-        const newCards = [...this.state.cards, card];
-        this.setState({cards: newCards});
+        cards.push(newCard);
+        this.setState({cards: cards});
     };
 
     cardToRemoveHandler = (id, state) => {
@@ -87,8 +46,7 @@ class CardContextProvider extends Component {
 
     changeCardHandler = id => (caption, text) => {
         const {cards} = this.state;
-        const cardIndex = cards
-            .findIndex(card => {return card.id === id});
+        const cardIndex = cards.findIndex(card => card.id === id);
         const card = {...cards[cardIndex]};
 
         card.caption = caption;
@@ -98,6 +56,24 @@ class CardContextProvider extends Component {
         newCards[cardIndex] = card;
 
         this.setState({cards: newCards})
+    };
+
+    _transformPokemon = (pokemon) => {
+        return {
+            id: pokemon.Number,
+            caption: pokemon.Name,
+            text: pokemon.About
+        }
+    };
+
+    componentDidMount() {
+        axios.get(this._url)
+            .then(response => {
+                const pokemons = response.data.slice(0, 15);
+                const cards = pokemons.map(this._transformPokemon)
+                this.setState({cards: cards})
+            })
+            .catch(() => this.setState({error: true}));
     };
 
     render() {
@@ -110,7 +86,8 @@ class CardContextProvider extends Component {
                 onAdd: this.addCardHandler,
                 removeCard: this.cardToRemoveHandler,
                 onRemove: this.removeCardHandler,
-                changeCard: this.changeCardHandler
+                changeCard: this.changeCardHandler,
+                error: this.state.error,
             }}>
                 {this.props.children}
             </Provider>

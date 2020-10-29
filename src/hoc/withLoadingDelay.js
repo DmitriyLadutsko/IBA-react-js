@@ -5,6 +5,7 @@ const withLoadingDelay = LoadingComponent => props => {
 
     const [isLoad, setLoad] = useState(false);
 
+
     useEffect(() => {
         setTimeout(() => {
             setLoad(true)
