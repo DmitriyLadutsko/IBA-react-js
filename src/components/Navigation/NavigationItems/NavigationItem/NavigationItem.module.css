@@ -1,0 +1,15 @@
+.NavigationItem {
+    margin: 15px 25px;
+    box-sizing: border-box;
+    display: block;
+}
+
+.NavigationItem a {
+    color: #8F5C2C;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.NavigationItem a:hover {
+    color: #40A4C8;
+}
