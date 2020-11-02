@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import Spinner from "../Spinner";
+import Spinner from "../UI/Spinner";
 import {CardContextConsumer} from '../../context/Context';
 
 const CardList = ({cards, error}) => {
