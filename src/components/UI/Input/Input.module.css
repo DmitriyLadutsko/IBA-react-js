@@ -28,12 +28,12 @@
 }
 
 .Invalid {
-    border: 1px solid red;
+    border: 1px solid #f83333;
     background-color: #ffe0dc;
 }
 
 .ValidationError {
-    color: red;
+    color: #f83333;
     margin: 5px 0;
     width: inherit;
 }
