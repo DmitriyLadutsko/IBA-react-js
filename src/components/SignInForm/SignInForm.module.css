@@ -1,0 +1,13 @@
+.SignInForm {
+    margin: 20px auto;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.SignInForm h3 {
+    font: inherit;
+}

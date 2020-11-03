@@ -7,6 +7,13 @@
     padding: 5px;
 }
 
+.Button:disabled {
+    color: #ccc;
+    background-color: white;
+    border: double #ccc;
+    cursor: not-allowed;
+}
+
 .Brawn {
     background-color: brown;
     border: double brown;
@@ -26,4 +33,9 @@
 .Orange:hover {
     color: #FF9800;
     background-color: #f6ddb79c;
+}
+
+.Orange:disabled {
+    color: #ccc;
+    background-color: white;
 }

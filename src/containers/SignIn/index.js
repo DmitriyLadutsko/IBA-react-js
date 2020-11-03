@@ -1,8 +1,8 @@
 import React from "react";
-import SignInInputs from "../../components/SignInInputs";
+import SignInForm from "../../components/SignInForm";
 
 const SignIn = () => (
-    <SignInInputs />
+    <SignInForm />
 );
 
 export default SignIn;
