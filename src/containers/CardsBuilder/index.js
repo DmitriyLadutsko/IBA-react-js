@@ -35,7 +35,7 @@ const CardBuilder = (props) => {
             }
         `;
 
-    const selectCardHandler = (id) => {
+    const selectCardHandler = id => {
         props.history.push('/cards/' + id);
     }
 

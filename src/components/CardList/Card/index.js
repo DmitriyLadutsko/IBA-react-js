@@ -102,7 +102,7 @@ const Card = (props) => {
 
     return (
         <div
-            onDoubleClick={props.dblClick}
+            onDoubleClick={!isEdit && props.dblClick}
             className="Card"
             style={{backgroundColor: isChecked ? '#c2f5f5' : '#ebc2f5'}}>
             <div style={styleCaption}>
