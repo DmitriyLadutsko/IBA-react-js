@@ -1,20 +1,24 @@
 import React from "react";
 import './Header.css';
-import {CardContextConsumer} from '../../context/Context';
 import NavigationItems from "../Navigation/NavigationItems";
+import {connect} from 'react-redux';
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header className="Header">
             <h1>purple cards</h1>
-            <CardContextConsumer>
-                {({cardsCount}) => <span className="counter">{cardsCount}</span>}
-            </CardContextConsumer>
+            <span className="counter">{props.cardsCount}</span>
             <nav>
-                <NavigationItems />
+                <NavigationItems/>
             </nav>
         </header>
     );
 };
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        cardsCount: state.cards.length
+    }
+};
+
+export default connect(mapStateToProps)(Header);
