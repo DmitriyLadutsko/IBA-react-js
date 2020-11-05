@@ -1,8 +1,23 @@
-export const ADD_CARDS_FROM_SERVER = 'ADD_CARDS_FROM_SERVER';
-export const HAVE_ERROR = 'HAVE_ERROR';
-export const ADD_CARD = 'ADD_CARD';
-export const REMOVE_CARDS = 'REMOVE_CARDS';
-export const CHANGE_CARD = 'CHANGE_CARD';
-export const CARD_TO_REMOVE = 'CARD_TO_REMOVE';
-// export const EDIT_TEXT = 'EDIT_TEXT';
-export const CHANGE_VIEW_CHECKBOX = 'CHANGE_VIEW_CHECKBOX';
+import * as actionTypes from "./types";
+
+export const onCheckBoxView = () => ({
+    type: actionTypes.CHANGE_VIEW_CHECKBOX
+});
+export const onRemoveCards = () => ({
+    type: actionTypes.REMOVE_CARDS
+});
+export const onAddCard = () => ({
+    type: actionTypes.ADD_CARD
+});
+export const onRemoveCard = (id, checkBoxState) => ({
+    type: actionTypes.CARD_TO_REMOVE, cardId: id, state: checkBoxState
+});
+export const onChangeCard = (id, card) => ({
+    type: actionTypes.CHANGE_CARD, cardId: id, changedData: card
+});
+export const onAddCardsFromServer = (cards) => ({
+        type: actionTypes.ADD_CARDS_FROM_SERVER, payload: cards
+});
+export const onHaveError = () => ({
+    type: actionTypes.HAVE_ERROR
+});

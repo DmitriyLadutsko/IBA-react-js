@@ -1,4 +1,4 @@
-import * as actionTypes from './actions';
+import * as actionTypes from './types';
 
 const initialState = {
     cards: [],
@@ -14,6 +14,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cards: fromServerCards
+            }
+
+        case actionTypes.HAVE_ERROR:
+            return {
+                ...state,
+                error: !state.error
             }
 
         case actionTypes.CHANGE_VIEW_CHECKBOX:
@@ -50,7 +56,7 @@ const reducer = (state = initialState, action) => {
             const cards = [...state.cards];
             const lastCard = cards[cards.length - 1];
             const newCard = {
-                id: '' + (+lastCard.id + 1),
+                id: (+lastCard.id + 1),
                 caption: 'This is a new Card',
                 text: 'Card description',
             };

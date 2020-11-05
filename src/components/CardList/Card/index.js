@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {connect} from 'react-redux';
+import {onChangeCard, onRemoveCard} from '../../../store/actions';
 
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
@@ -11,7 +12,6 @@ import './Card.css';
 import {FaPencilAlt} from 'react-icons/fa';
 import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
-import * as actionTypes from "../../../store/actions";
 
 const Card = (props) => {
     const [isChecked, setChecked] = useState(false);
@@ -102,7 +102,7 @@ const Card = (props) => {
 
     return (
         <div
-            onDoubleClick={!isEdit && props.dblClick}
+            onDoubleClick={!isEdit ? props.dblClick : undefined}
             className="Card"
             style={{backgroundColor: isChecked ? '#c2f5f5' : '#ebc2f5'}}>
             <div style={styleCaption}>
@@ -135,13 +135,9 @@ Card.propTypes = {
     }),
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onChangeCard: (id, card) =>
-            dispatch({type: actionTypes.CHANGE_CARD, cardId: id, changedData: card}),
-        onRemoveCard: (id, checkBoxState) =>
-            dispatch({type: actionTypes.CARD_TO_REMOVE, cardId: id, state: checkBoxState})
-    }
+const mapDispatchToProps = {
+        onChangeCard,
+        onRemoveCard
 }
 
 

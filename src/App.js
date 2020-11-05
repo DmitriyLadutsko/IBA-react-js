@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Route, Switch } from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from "axios";
-import * as actionTypes from './store/actions';
+import {onAddCardsFromServer, onHaveError} from './store/actions';
 
 import Header from './components/Header';
 import CardBuilder from "./containers/CardsBuilder";
@@ -49,11 +49,9 @@ class App extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onAddCardsFromServer: (cards) => dispatch({type: actionTypes.ADD_CARDS_FROM_SERVER, payload: cards}),
-        onHaveError: () => dispatch({type: actionTypes.HAVE_ERROR})
-    }
+const mapDispatchToProps = {
+        onAddCardsFromServer,
+        onHaveError
 }
 
 export default connect(null, mapDispatchToProps)(App);

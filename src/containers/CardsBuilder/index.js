@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import CardList from "../../components/CardList";
 import styled from "styled-components";
 import Button from "../../components/UI/Button";
-import * as actionTypes from '../../store/actions';
+import * as actionTypes from '../../store/types';
+import {onAddCard, onCheckBoxView, onRemoveCards } from '../../store/actions'
 
 const CardBuilder = (props) => {
 
@@ -67,12 +68,10 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onCheckBoxView: () => dispatch({type: actionTypes.CHANGE_VIEW_CHECKBOX}),
-        onRemoveCards: () => dispatch({type: actionTypes.REMOVE_CARDS}),
-        onAddCard: () => dispatch({type: actionTypes.ADD_CARD}),
-    };
+const mapDispatchToProps = {
+        onCheckBoxView,
+        onRemoveCards,
+        onAddCard,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardBuilder);
