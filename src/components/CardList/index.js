@@ -1,34 +1,37 @@
 import React from "react";
+import {connect} from 'react-redux';
+
 import Card from "./Card";
 import Spinner from "../UI/Spinner";
-import {CardContextConsumer} from '../../context/Context';
 
-const CardList = ({cards, error}) => {
+const CardList = (props) => {
     let cardsView =
         <p style={{textAlign: 'center', color: 'red', fontSize: '1.7rem'}}>
             failed to get pokemon
         </p>;
 
-    if (!error) {
-        cardsView = <CardContextConsumer>
-            {({cards, onlyView, changeCard, removeCard}) => (
-                cards.map((card) => {
-                        return (
-                            <Card
-                                key={card.id}
-                                card={card}
-                                onlyView={onlyView}
-                                changeCard={changeCard(card.id)}
-                                removeCard={removeCard}
-                            />
-                        )
-                    }
-                )
-            )}
-        </CardContextConsumer>
+    if (!props.error) {
+        cardsView = props.cards.map((card) => {
+            return (
+                <Card
+                    key={card.id}
+                    card={card}
+                    onlyView={props.onlyView}
+                    dblClick={() => props.onDblClick(card.id)}
+                />
+            );
+        })
     }
 
-    return (cards.length !== 0) ? cardsView : <Spinner/>;
+    return (props.cards.length !== 0) ? cardsView : <Spinner/>;
 }
 
-export default CardList;
+const mapStateToProps = state => {
+    return {
+      cards: state.cards,
+      isOnlyView: state.onlyView,
+      err: state.error
+    };
+}
+
+export default connect(mapStateToProps)(CardList);

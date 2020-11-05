@@ -1,0 +1,25 @@
+.FullCard {
+    font-size: 1.3rem;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.FullCard textarea {
+    width: 90%;
+    height: 200px;
+    font-size: 1.4rem;
+    margin: 10px 5px;
+}
+
+.FullCard input {
+    font-size: inherit;
+}
+
+.FullCard p, h4 {
+    padding: 0 30px;
+}
+
+.FullCard input[type=checkbox] {
+    display: none;
+}

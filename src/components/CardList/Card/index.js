@@ -1,4 +1,7 @@
 import React, {useState} from "react";
+import {connect} from 'react-redux';
+import {onChangeCard, onRemoveCard} from '../../../store/actions';
+
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import withLoadingDelay from "../../../hoc/withLoadingDelay";
@@ -11,46 +14,47 @@ import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
 
 const Card = (props) => {
-    const {card, onlyView, changeCard, removeCard} = props;
-
     const [isChecked, setChecked] = useState(false);
 
     const [isEdit, setEdit] = useState(false);
 
     const [caption, setCaption] = useState({
-        captionValue: card.caption
+        captionValue: props.card.caption
     });
 
     const [text, setText] = useState({
-        textValue: card.text
+        textValue: props.card.text
     });
 
-    if (onlyView && isEdit) {
+    if (props.onlyView && isEdit) {
         setEdit(!isEdit)
     }
 
     const editMode = () => {
-        setCaption({captionValue: card.caption});
-        setText({textValue: card.text})
+        setCaption({captionValue: props.card.caption});
+        setText({textValue: props.card.text})
         setChecked(false);
         setEdit(!isEdit);
     };
 
     const saveChanges = () => {
-        changeCard(caption.captionValue, text.textValue);
+        props.onChangeCard(props.card.id, {
+            caption: caption.captionValue,
+            text: text.textValue
+        });
         setEdit(!isEdit);
     };
 
     const activatedCard = () => {
         setChecked(!isChecked);
-        removeCard(card.id, !isChecked);
+        props.onRemoveCard(props.card.id, !isChecked);
     };
 
     let buttons = (
         <>
             {!isEdit ?
                 <div>
-                    {!onlyView &&
+                    {!props.onlyView &&
                     <button
                         onClick={editMode}>
                         <FaPencilAlt/>
@@ -64,7 +68,7 @@ const Card = (props) => {
                 </div> :
 
                 <div>
-                    {onlyView &&
+                    {props.onlyView &&
                     <input
                         type="checkbox"
                         checked={isChecked}
@@ -72,13 +76,13 @@ const Card = (props) => {
                     />
                     }
 
-                    {!onlyView &&
+                    {!props.onlyView &&
                     <button
                         onClick={saveChanges}>
                         <FaSave/>
                     </button>
                     }
-                    {!onlyView &&
+                    {!props.onlyView &&
                     <button
                         onClick={() => setEdit(!isEdit)}>
                         <MdClear/>
@@ -97,7 +101,10 @@ const Card = (props) => {
     };
 
     return (
-        <div className="Card" style={{backgroundColor: isChecked ? '#c2f5f5' : '#ebc2f5'}}>
+        <div
+            onDoubleClick={!isEdit ? props.dblClick : undefined}
+            className="Card"
+            style={{backgroundColor: isChecked ? '#c2f5f5' : '#ebc2f5'}}>
             <div style={styleCaption}>
                 <CardHeader
                     doesEdit={isEdit}
@@ -119,13 +126,19 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-    onlyView: PropTypes.bool.isRequired,
-    changeCard: PropTypes.func.isRequired,
-    removeCard: PropTypes.func.isRequired,
+    onlyView: PropTypes.bool,
+    onChangeCard: PropTypes.func.isRequired,
+    onRemoveCard: PropTypes.func.isRequired,
     card: PropTypes.shape({
         caption: PropTypes.string,
         text: PropTypes.string,
     }),
 };
 
-export default withLoadingDelay(Card);
+const mapDispatchToProps = {
+        onChangeCard,
+        onRemoveCard
+}
+
+
+export default connect(null, mapDispatchToProps)(withLoadingDelay(Card));
