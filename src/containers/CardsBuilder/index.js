@@ -2,39 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import CardList from "../../components/CardList";
-import styled from "styled-components";
 import Button from "../../components/UI/Button";
-import * as actionTypes from '../../store/types';
-import {onAddCard, onCheckBoxView, onRemoveCards } from '../../store/actions'
+import {onAddCard, onRemoveCards} from '../../store/actions'
 
 const CardBuilder = (props) => {
-
-    const StyledLabel = styled.label.attrs(() => ({
-        htmlFor: 'checkbox'
-    }))`
-        color: darkmagenta;
-        border: double darkmagenta;
-        border-radius: 8px;
-        margin: 20px;
-        padding: 5px;
-        cursor: pointer;
-        &:hover {
-            color: white;
-            background-color: darkmagenta;
-        }
-        `;
-
-    const StyledCheckbox = styled.input.attrs(() => ({
-        id: 'checkbox',
-        type: 'checkbox',
-    }))`
-        width: 18px;
-        height: 18px;
-            &:checked + ${StyledLabel} {
-              background: darkmagenta;
-              color: white;
-            }
-        `;
 
     const selectCardHandler = id => {
         props.history.push('/cards/' + id);
@@ -42,19 +13,15 @@ const CardBuilder = (props) => {
 
     return (
         <>
-            <StyledCheckbox
-                checked={props.isOnlyView}
-                onChange={props.onCheckBoxView}
-            />
-            <StyledLabel>
-                <i><b>View-only mode</b></i>
-            </StyledLabel>
-            <Button
-                clicked={props.onRemoveCards}
-                btnStyle="Brawn">Remove Checked Cards</Button>
-            <Button
-                clicked={props.onAddCard}
-                btnStyle="Orange">Add Card</Button>
+            <div style={{display: 'flex'}}>
+                <Button
+                    clicked={props.onRemoveCards}
+                    btnStyle="Brawn">Remove Checked Cards</Button>
+                <Button
+                    clicked={props.onAddCard}
+                    btnStyle="Orange">Add Card</Button>
+            </div>
+
             <main>
                 <CardList onDblClick={selectCardHandler}/>
             </main>
@@ -62,16 +29,10 @@ const CardBuilder = (props) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        isOnlyView: state.onlyView
-    };
-};
-
 const mapDispatchToProps = {
-        onCheckBoxView,
-        onRemoveCards,
-        onAddCard,
+    onRemoveCards,
+    onAddCard
+
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardBuilder);
+export default connect(null, mapDispatchToProps)(CardBuilder);

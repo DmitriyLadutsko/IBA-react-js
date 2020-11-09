@@ -28,9 +28,9 @@ const CardList = (props) => {
 
 const mapStateToProps = state => {
     return {
-      cards: state.cards,
-      isOnlyView: state.onlyView,
-      err: state.error
+      cards: state.cards.cards,
+      onlyView: state.cards.onlyView,
+      err: state.cards.error
     };
 }
 

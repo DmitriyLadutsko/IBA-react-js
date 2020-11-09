@@ -24,7 +24,7 @@ const FullCard = (props) => {
 
 const mapStateToProps = state => {
     return {
-        cards: state.cards
+        cards: state.cards.cards
     }
 }
 
