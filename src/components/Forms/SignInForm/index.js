@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-import Button from "../UI/Button";
-import Input from "../UI/Input";
+import Button from "../../UI/Button";
+import Input from "../../UI/Input";
 import classes from './SignInForm.module.css';
+import {onLoginUser} from '../../../store/actions';
 
 const SignInForm = (props) => {
 
@@ -40,7 +42,9 @@ const SignInForm = (props) => {
         }
     });
 
-    const checkAndLogin = () => {
+    const checkAndLogin = (values) => {
+
+        props.onLoginUser(values);
         props.history.replace('/');
     }
 
@@ -112,4 +116,8 @@ const SignInForm = (props) => {
     );
 }
 
-export default withRouter(SignInForm);
+const mapDispatchToProps = {
+    onLoginUser
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(SignInForm));

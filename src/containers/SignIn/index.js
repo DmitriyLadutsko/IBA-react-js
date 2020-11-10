@@ -1,8 +1,9 @@
 import React from "react";
-import SignInForm from "../../components/SignInForm";
+// import SignInForm from "../../components/Forms/SignInForm";
+import AltForm from "../../components/Forms/AltForm";
 
 const SignIn = () => (
-    <SignInForm />
+    <AltForm />
 );
 
 export default SignIn;

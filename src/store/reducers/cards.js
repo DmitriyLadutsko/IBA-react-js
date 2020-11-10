@@ -1,4 +1,4 @@
-import * as actionTypes from './types';
+import * as actionTypes from '../actions/types';
 
 const initialState = {
     cards: [],
@@ -7,25 +7,37 @@ const initialState = {
     onlyView: false,
 }
 
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_CARDS_FROM_SERVER:
+        case actionTypes.SET_CARDS_FROM_SERVER:
             const fromServerCards = action.payload;
             return {
                 ...state,
                 cards: fromServerCards
-            }
+            };
 
-        case actionTypes.HAVE_ERROR:
+        case actionTypes.FETCH_CARDS_FAILED:
             return {
                 ...state,
                 error: !state.error
-            }
+            };
 
         case actionTypes.CHANGE_VIEW_CHECKBOX:
+            if (!state.onlyView) {
+                localStorage.setItem('viewMode', ' ')
+            } else {
+                localStorage.removeItem('viewMode')
+            }
             return {
                 ...state,
                 onlyView: !state.onlyView
+            };
+
+        case actionTypes.SET_CHECKBOX:
+            return  {
+                ...state,
+                onlyView: action.viewMode
             }
 
         case actionTypes.CHANGE_CARD:
@@ -38,7 +50,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cards: newCards
-            }
+            };
 
         case actionTypes.CARD_TO_REMOVE:
             let updatedCardsToRemove = [ ...state.cardsToRemove ];
@@ -50,7 +62,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cardsToRemove: updatedCardsToRemove
-            }
+            };
 
         case actionTypes.ADD_CARD:
             const cards = [...state.cards];
@@ -63,14 +75,14 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cards: state.cards.concat(newCard)
-            }
+            };
 
         case actionTypes.REMOVE_CARDS:
             const updatedCards = state.cards.filter(card => !state.cardsToRemove.includes(card.id))
             return {
                 ...state,
                 cards: updatedCards
-            }
+            };
 
         default:
             return state;

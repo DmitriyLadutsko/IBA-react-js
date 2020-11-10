@@ -1,0 +1,11 @@
+export const SET_CARDS_FROM_SERVER = 'ADD_CARDS_FROM_SERVER';
+export const FETCH_CARDS_FAILED = 'HAVE_ERROR';
+export const ADD_CARD = 'ADD_CARD';
+export const REMOVE_CARDS = 'REMOVE_CARDS';
+export const CHANGE_CARD = 'CHANGE_CARD';
+export const CARD_TO_REMOVE = 'CARD_TO_REMOVE';
+export const CHANGE_VIEW_CHECKBOX = 'CHANGE_VIEW_CHECKBOX';
+export const SET_CHECKBOX = 'SET_CHECKBOX';
+
+export const SET_USER = 'SET_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';

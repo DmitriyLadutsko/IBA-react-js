@@ -7,6 +7,7 @@ const Header = (props) => {
     return (
         <header className="Header">
             <h1>purple cards</h1>
+            {props.user && <h3>welcome, {props.user.username}</h3>}
             <span className="counter">{props.cardsCount}</span>
             <nav>
                 <NavigationItems/>
@@ -17,7 +18,8 @@ const Header = (props) => {
 
 const mapStateToProps = state => {
     return {
-        cardsCount: state.cards.length
+        cardsCount: state.cards.cards.length,
+        user: state.auth.user
     }
 };
 
