@@ -13,7 +13,7 @@ import {FaPencilAlt} from 'react-icons/fa';
 import {FaSave} from 'react-icons/fa';
 import {MdClear} from 'react-icons/md';
 
-const Card = (props) => {
+export const Card = (props) => {
     const [isChecked, setChecked] = useState(false);
 
     const [isEdit, setEdit] = useState(false);
