@@ -1,16 +1,16 @@
 import React from "react";
 
 const CardBody = (props) => {
-    const {doesEdit, card, inputTextValue, changeText} = props;
+    // const {doesEdit, card, inputTextValue, changeText} = props;
 
     return (
         <div>
-            {!doesEdit ?
-                <p>{card.text}</p> :
+            {!props.doesEdit ?
+                <p>{props.card.text}</p> :
                 <textarea
                     rows="3"
-                    value={inputTextValue}
-                    onChange={changeText}
+                    value={props.inputTextValue}
+                    onChange={props.changeText}
                 />}
         </div>
     )
