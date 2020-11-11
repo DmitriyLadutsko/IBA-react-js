@@ -30,6 +30,10 @@ export const Card = (props) => {
         setEdit(!isEdit)
     }
 
+    const onChangeCaption = event => setCaption({captionValue: event.target.value});
+
+    const onChangeText = event => setText({textValue: event.target.value});
+
     const editMode = () => {
         setCaption({captionValue: props.card.caption});
         setText({textValue: props.card.text})
@@ -109,7 +113,7 @@ export const Card = (props) => {
                 <CardHeader
                     doesEdit={isEdit}
                     inputCaptionValue={caption.captionValue}
-                    changeCaption={event => setCaption({captionValue: event.target.value})}
+                    changeCaption={onChangeCaption}
                     {...props}
                 />
                 {buttons}
@@ -118,9 +122,11 @@ export const Card = (props) => {
             <CardBody
                 doesEdit={isEdit}
                 inputTextValue={text.textValue}
-                changeText={event => setText({textValue: event.target.value})}
+                changeText={onChangeText}
                 {...props}
             />
+            <input value={caption.captionValue} onChange={onChangeCaption} type="text" style={{display: 'none'}}/>
+            <input value={text.textValue} onChange={onChangeText} type="text" style={{display: 'none'}}/>
         </div>
     );
 };
